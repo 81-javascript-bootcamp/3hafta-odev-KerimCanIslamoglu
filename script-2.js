@@ -1,4 +1,4 @@
-const petsModule = (function(){
+const petsModule = (function () {
     const _data = [
         {
             image: "https://pet-uploads.adoptapet.com/1/6/b/406528149.jpg",
@@ -16,42 +16,71 @@ const petsModule = (function(){
         }
     ];
     const $tbodyEl = document.querySelector("tbody");
-    const $buttons= document.querySelectorAll("button");
+    const $buttons = document.querySelectorAll("button");
 
-    const getButtons = function(){
+    const getButtons = function () {
         return document.querySelectorAll("button");
     }
 
-    const createPetElement = function(pet){
-        return "<tr><td><img class='pet-image' src='"+pet.image+"' /></td><td>"+pet.name+"</td><td>"+pet.type+"</td><td><button data-sound='"+pet.sound+"'>"+pet.soundText+"</button></td></tr>"
+    const createPetElement = function (pet) {
+        return "<tr class='pet-row'><td><img class='pet-image' src='" + pet.image + "' /></td><td>" + pet.name + "</td><td>" + pet.type + "</td><td><button data-sound='" + pet.sound + "'>" + pet.soundText + "</button></td></tr>"
     };
 
-    const addToTable = function(content){
+    const addToTable = function (content) {
         $tbodyEl.innerHTML += content;
     }
 
-    const putPetsInHtml = function(){
-        for(let i=0; i< _data.length; i++){
+    const putPetsInHtml = function () {
+        for (let i = 0; i < _data.length; i++) {
             addToTable(createPetElement(_data[i]));
         }
     }
 
-    const bindEvents = function(){
+    const bindEvents = function () {
         const buttons = getButtons();
-        for(let i= 0; i< buttons.length; i++){
-            buttons[i].addEventListener("click", function(event){
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener("click", function (event) {
                 const soundId = this.dataset.sound;
                 const soundElement = document.getElementById(soundId);
-                if(soundElement){
+                if (soundElement) {
                     soundElement.play();
                 }
             });
         }
     }
 
-    const init = function(){
+    const bindBarkTypeEvent = function () {
+        let bark = document.querySelector('#bark');
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code == 'KeyB') {
+                bark.play();
+            }
+        })
+    }
+
+    const bindMeowTypeEvent = function () {
+        let meow = document.querySelector('#meow');
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code == 'KeyM') {
+                meow.play();
+            }
+        })
+    }
+
+    const changeRowColor = function () {
+        let petRow=document.querySelector('.pet-row');
+
+        
+    }
+
+    const init = function () {
         putPetsInHtml();
         bindEvents();
+        bindBarkTypeEvent();
+        bindMeowTypeEvent();
+        changeRowColor();
     }
 
     return {
