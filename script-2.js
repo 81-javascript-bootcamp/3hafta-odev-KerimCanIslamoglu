@@ -40,6 +40,7 @@ const petsModule = (function () {
         const buttons = getButtons();
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener("click", function (event) {
+                event.stopPropagation();
                 const soundId = this.dataset.sound;
                 const soundElement = document.getElementById(soundId);
                 if (soundElement) {
@@ -70,9 +71,25 @@ const petsModule = (function () {
     }
 
     const changeRowColor = function () {
-        let petRow=document.querySelector('.pet-row');
+        debugger;
+        let petRow = document.querySelectorAll('.pet-row');
 
-        
+        for (let i = 0; i < petRow.length; i++) {
+            petRow[i].addEventListener("click", function (e) {
+                if (petRow[i].style.backgroundColor) {
+                    petRow[i].style.backgroundColor = "";
+                } else {
+                    petRow[i].style.backgroundColor = "red";
+                }
+                debugger;
+                let mainImg = document.querySelector('.main-image');
+                let childImgSrc = petRow[i].childNodes[0].firstChild.currentSrc
+
+                mainImg.setAttribute("src", childImgSrc)
+            });
+        }
+
+
     }
 
     const init = function () {
