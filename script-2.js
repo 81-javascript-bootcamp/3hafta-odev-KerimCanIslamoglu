@@ -70,8 +70,7 @@ const petsModule = (function () {
         })
     }
 
-    const changeRowColor = function () {
-        debugger;
+    const changeRowColorAndImg = function () {
         let petRow = document.querySelectorAll('.pet-row');
 
         for (let i = 0; i < petRow.length; i++) {
@@ -81,7 +80,6 @@ const petsModule = (function () {
                 } else {
                     petRow[i].style.backgroundColor = "red";
                 }
-                debugger;
                 let mainImg = document.querySelector('.main-image');
                 let childImgSrc = petRow[i].childNodes[0].firstChild.currentSrc
 
@@ -97,7 +95,7 @@ const petsModule = (function () {
         bindEvents();
         bindBarkTypeEvent();
         bindMeowTypeEvent();
-        changeRowColor();
+        changeRowColorAndImg();
     }
 
     return {
